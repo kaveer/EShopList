@@ -4,7 +4,7 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              android:background="@android:color/background_dark"
-             tools:context="com.kavsoftware.kaveer.eshoplist.SplashScreenActivity">
+             tools:context="com.kavsoftware.kaveer.eshoplist.Activity.SplashScreenActivity">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
