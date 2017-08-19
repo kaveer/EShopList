@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.kavsoftware.kaveer.eshoplist.DbHandler.DbHandler;
 import com.kavsoftware.kaveer.eshoplist.Model.ItemViewModel;
 import com.kavsoftware.kaveer.eshoplist.Model.ListViewModel;
 import com.kavsoftware.kaveer.eshoplist.R;
@@ -25,7 +26,8 @@ public class CreateListActivity extends AppCompatActivity {
 
     ItemViewModel itemModel = new ItemViewModel();
     ListViewModel listModel = new ListViewModel();
-    private   ArrayList<ItemViewModel> arrayItemsModel = new ArrayList<>();
+    private  ArrayList<ItemViewModel> arrayItemsModel = new ArrayList<>();
+    private  int listId;
 
     private EditText date;
     private EditText listTitle;
@@ -35,8 +37,8 @@ public class CreateListActivity extends AppCompatActivity {
     private ListView items;
     private Button addItem;
     private EditText quantity;
-    private  Button saveList;
-    private   ArrayList<String> arrayItems = new ArrayList<>();
+    private Button saveList;
+    private ArrayList<String> arrayItems = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,18 +69,23 @@ public class CreateListActivity extends AppCompatActivity {
                 saveList.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        SetListModel();
-                        if (SaveListDetails(listModel)){
-                           if (SaveItem(arrayItemsModel, listModel.listId)){
-                               Toast messageBox = Toast.makeText(CreateListActivity.this, "List Saved ", Toast.LENGTH_LONG);
-                               messageBox.show();
-                           }
-
-                            Toast messageBox = Toast.makeText(CreateListActivity.this, "Unable to save list ", Toast.LENGTH_LONG);
-                            messageBox.show();
-                        }
-                        else {
-                            Toast messageBox = Toast.makeText(CreateListActivity.this, "List already exist", Toast.LENGTH_LONG);
+                        if (arrayItemsModel.size() > 0) {
+                            SetListModel();
+                            if (SaveListDetails(listModel, CreateListActivity.this)) {
+                                if (SaveItem(arrayItemsModel, listId, CreateListActivity.this)) {
+                                    Toast messageBox = Toast.makeText(CreateListActivity.this, "List Saved ", Toast.LENGTH_LONG);
+                                    messageBox.show();
+                                }
+                                else {
+                                    Toast messageBox = Toast.makeText(CreateListActivity.this, "Unable to save list ", Toast.LENGTH_LONG);
+                                    messageBox.show();
+                                }
+                            } else {
+                                Toast messageBox = Toast.makeText(CreateListActivity.this, "List already exist", Toast.LENGTH_LONG);
+                                messageBox.show();
+                            }
+                        }else {
+                            Toast messageBox = Toast.makeText(CreateListActivity.this, "No item added cannot save list", Toast.LENGTH_LONG);
                             messageBox.show();
                         }
                     }
@@ -93,19 +100,46 @@ public class CreateListActivity extends AppCompatActivity {
         }
     }
 
-    private boolean SaveItem(ArrayList<ItemViewModel> arrayItemsModel, int listId) {
-        return true;
+    private boolean SaveItem(ArrayList<ItemViewModel> arrayItemsModel, int listId, CreateListActivity listActivity) {
+        DbHandler DB = new DbHandler(listActivity);
+        boolean result = false;
+        for (ItemViewModel item:arrayItemsModel) {
+            try{
+                item.listId = listId;
+                DB.SaveItem(item);
+                result = true;
+            }
+            catch (Exception msg){
+                Log.e("Error", msg.getMessage());
+                System.out.println("Error " + msg.getMessage());
+                result = false;
+            }
+        }
+        return result;
     }
 
-    private boolean SaveListDetails(ListViewModel listModel) {
-        //save list
-        //get list id
-        return  true;
+    private boolean SaveListDetails(ListViewModel listModel, CreateListActivity listActivity) {
+        DbHandler DB = new DbHandler(listActivity);
+        ListViewModel isListExist = new ListViewModel();
+
+        isListExist = DB.GetListByListNameAndStatus(listModel);
+        if (isListExist.listId > 0){
+            return false;
+        }
+        else {
+            if (!DB.SaveList(listModel)){
+                return false;
+            }
+            listModel = DB.GetListByListNameAndStatus(listModel);
+            listId = listModel.listId;
+            return  true;
+        }
     }
 
     private void SetListModel() {
+
         listModel.listTitle = listTitle.getText().toString();
-        listModel.isActive = true;
+        listModel.listDate = date.getText().toString() ;
     }
 
     private void SetItemModel() {

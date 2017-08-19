@@ -7,5 +7,6 @@ package com.kavsoftware.kaveer.eshoplist.Model;
 public class ListViewModel {
     public  int listId;
     public String listTitle;
-    public boolean isActive;
+    public String listDate;
+    public String isActive = "IsActive";
 }
