@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_create_list) {
             Intent i = new Intent(MainActivity.this, CreateListActivity.class);
             startActivity(i);
-             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         } else if (id == R.id.nav_generate_list) {
             Intent i = new Intent(MainActivity.this, GenerateListActivity.class);
             startActivity(i);
