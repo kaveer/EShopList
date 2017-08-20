@@ -57,11 +57,12 @@
         android:layout_width="243dp"
         android:layout_height="45dp"
         android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/txtItem"
         android:layout_marginStart="8dp"
-        android:entries="@array/CategorySpinner"/>
+        android:layout_marginTop="8dp"
+        android:background="@color/colorPrimary"
+        android:entries="@array/CategorySpinner"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtItem"/>
 
     <EditText
         android:id="@+id/txtPrice"
@@ -80,12 +81,14 @@
         android:id="@+id/btnSaveItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
+        android:background="@color/colorPrimary"
+        android:elevation="0dp"
         android:text="Add Item"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPrice"
-        android:layout_marginEnd="8dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/txtPrice"/>
 
     <Button
         android:id="@+id/btnSaveList"
@@ -95,6 +98,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
+        android:background="@color/colorPrimary"
         android:text="Save List"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
