@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -22,6 +24,7 @@ public class ViewItemInListActivity extends AppCompatActivity {
     private ArrayList<ItemViewModel> itemsFromList = new ArrayList<>();
     private ArrayList<String> arrayItems = new ArrayList<>();
     private ListView itemsListVIew;
+    private Button deleteList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +35,7 @@ public class ViewItemInListActivity extends AppCompatActivity {
         setTitle("View item");
 
         Intent i = getIntent();
-        ListViewModel selectedList = (ListViewModel) i.getSerializableExtra("selectedList");
+        final ListViewModel selectedList = (ListViewModel) i.getSerializableExtra("selectedList");
 
         try{
             if (initializeWidget()){
@@ -51,6 +54,29 @@ public class ViewItemInListActivity extends AppCompatActivity {
                     }
 
                 }
+
+                deleteList.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        boolean HasListRemoved = RemoveList(selectedList.listId, ViewItemInListActivity.this);
+                        if (HasListRemoved){
+
+                            Intent i = new Intent(ViewItemInListActivity.this, ViewListActivity.class);
+                            startActivity(i);
+                            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                        }
+                        else {
+                            Toast messageBox = Toast.makeText(ViewItemInListActivity.this , "Error Cannot remove list" , Toast.LENGTH_LONG);
+                            messageBox.show();
+                        }
+
+
+
+                    }
+
+
+                });
             }
         }catch (Exception msg){
             Toast messageBox = Toast.makeText(this , msg.getMessage() , Toast.LENGTH_LONG);
@@ -60,6 +86,15 @@ public class ViewItemInListActivity extends AppCompatActivity {
             System.out.println("Error " + msg.getMessage());
         }
 
+    }
+
+    private boolean RemoveList(int listId, ViewItemInListActivity viewItemInListActivity) {
+        boolean result = false;
+        DbHandler DB = new DbHandler(viewItemInListActivity);
+
+        result = DB.RemoveList(listId);
+
+        return  result;
     }
 
     private void PopulateListView() {
@@ -84,6 +119,7 @@ public class ViewItemInListActivity extends AppCompatActivity {
     private boolean initializeWidget() {
         try{
             itemsListVIew = (ListView) findViewById(R.id.itemsViewList);
+            deleteList = (Button) findViewById(R.id.BtnDeleteList);
 
             return true;
         } catch (Exception msg) {

@@ -203,4 +203,26 @@ public class DbHandler extends SQLiteOpenHelper {
 
         return result;
     }
+
+    public boolean RemoveList(int listId) {
+        try {
+
+            ListViewModel refineQuery = new ListViewModel();
+
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put(Tables.List.colStatus , refineQuery.isDeactivate);
+
+            db.update(Tables.List.tableName, values , Tables.List.colListId + " = ? " ,
+                    new String[]{String.valueOf(listId)} );
+
+            return true;
+
+        }catch (Exception msg){
+            Log.e("Error", msg.getMessage());
+            System.out.println("Error " + msg.getMessage());
+            return false;
+        }
+
+    }
 }
