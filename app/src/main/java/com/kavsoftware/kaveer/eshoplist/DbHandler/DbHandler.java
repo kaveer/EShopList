@@ -11,6 +11,8 @@ import com.kavsoftware.kaveer.eshoplist.Model.ItemViewModel;
 import com.kavsoftware.kaveer.eshoplist.Model.ListViewModel;
 import com.kavsoftware.kaveer.eshoplist.TableStructure.Tables;
 
+import java.util.ArrayList;
+
 /**
  * Created by kaveer on 8/19/2017.
  */
@@ -140,6 +142,64 @@ public class DbHandler extends SQLiteOpenHelper {
             System.out.println("Error " + msg.getMessage());
             result = false;
         }
+
+        return result;
+    }
+
+    public ArrayList<ListViewModel> RetrieveList(){
+        ArrayList<ListViewModel> result = new ArrayList<>();
+        ListViewModel refineQuery = new ListViewModel();
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query;
+        query  = "SELECT * FROM "
+                + Tables.List.tableName  +
+                " WHERE "  + Tables.List.colStatus + " = '" + refineQuery.isActive + "'";
+
+        Cursor cursor = db.rawQuery(query , null);
+        if(cursor.getCount() > 0){
+            for(cursor.moveToFirst(); !cursor.isAfterLast() ; cursor.moveToNext()){
+                ListViewModel item = new ListViewModel();
+
+                item.listId = Integer.parseInt(cursor.getString(0));
+                item.listTitle =  cursor.getString(1);
+                item.listDate = cursor.getString(2);
+                item.isActive = cursor.getString(3) ;
+
+                result.add(item);
+            }
+        }
+        db.close();
+
+        return result;
+    }
+
+    public ArrayList<ItemViewModel> RetrieveItemsByListId(int listId) {
+        ArrayList<ItemViewModel> result = new ArrayList<>();
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query;
+        query  = "SELECT * FROM "
+                + Tables.Item.tableName  +
+                " WHERE "  + Tables.Item.colListId + " = " + listId;
+
+        Cursor cursor = db.rawQuery(query , null);
+        if(cursor.getCount() > 0){
+            for(cursor.moveToFirst(); !cursor.isAfterLast() ; cursor.moveToNext()){
+                ItemViewModel item = new ItemViewModel();
+
+                item.itemId = Integer.parseInt(cursor.getString(0));
+                item.listId = Integer.parseInt(cursor.getString(1));
+                item.itemName = cursor.getString(2);
+                item.quantity = Integer.parseInt(cursor.getString(3));
+                item.category =  cursor.getString(4);
+                item.price = Double.parseDouble(cursor.getString(5));
+                item.totalPrice = Double.parseDouble(cursor.getString(6));
+
+                result.add(item);
+            }
+        }
+        db.close();
 
         return result;
     }

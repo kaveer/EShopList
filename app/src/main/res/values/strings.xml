@@ -12,17 +12,18 @@
     <string name="action_settings">Settings</string>
 
     <string-array name="CategorySpinner">
-        <item>January</item>
-        <item>February</item>
-        <item>March</item>
-        <item>April</item>
-        <item>May</item>
-        <item>June</item>
-        <item>July</item>
-        <item>August</item>
-        <item>September</item>
-        <item>October</item>
-        <item>November</item>
-        <item>December</item>
+        <item>Beverages – coffee/tea, juice, soda</item>
+        <item>Bread/Bakery – sandwich loaves, dinner rolls, tortillas, bagels</item>
+        <item>Canned/Jarred Goods – vegetables, spaghetti sauce, ketchup</item>
+        <item>Dairy – cheeses, eggs, milk, yogurt, butter</item>
+        <item>Dry/Baking Goods – cereals, flour, sugar, pasta, mixes</item>
+        <item>Frozen Foods – waffles, vegetables, individual meals, ice cream</item>
+        <item>Meat – lunch meat, poultry, beef, pork</item>
+        <item>Produce – fruits, vegetables</item>
+        <item>Cleaners – all- purpose, laundry detergent, dishwashing liquid/detergent</item>
+        <item>Paper Goods – paper towels, toilet paper, aluminum foil, sandwich bags</item>
+        <item>Personal Care – shampoo, soap, hand soap, shaving cream</item>
+        <item>Other – baby items, pet items, batteries, greeting cards</item>
     </string-array>
+
 </resources>

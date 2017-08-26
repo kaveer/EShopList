@@ -15,11 +15,6 @@
             android:label="@string/title_activity_splash_screen"
             android:screenOrientation="portrait"
             android:theme="@style/FullscreenTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity
             android:name=".Activity.MainActivity"
@@ -27,22 +22,32 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity
+            android:name=".Activity.CreateListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
 
-        <activity android:name=".Activity.CreateListActivity"
-                  android:theme="@style/AppTheme.NoActionBar"
-                  android:screenOrientation="portrait">
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
-
-        <activity android:name=".Activity.GenerateListActivity"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".Activity.GenerateListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
-
-        <activity android:name=".Activity.AddCategoryActivity"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".Activity.AddCategoryActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
-
-        <activity android:name=".Activity.ViewListActivity"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".Activity.ViewListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".Activity.ViewItemInListActivity">
         </activity>
     </application>
 
