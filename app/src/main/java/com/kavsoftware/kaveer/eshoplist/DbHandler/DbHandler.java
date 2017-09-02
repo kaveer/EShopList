@@ -225,4 +225,30 @@ public class DbHandler extends SQLiteOpenHelper {
         }
 
     }
+
+    public ArrayList<ItemViewModel> RetrieveItemsToGenerateList() {
+        ArrayList<ItemViewModel> result = new ArrayList<>();
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query;
+        query  = "SELECT DISTINCT(" + Tables.Item.colItemName + ") FROM "
+                + Tables.Item.tableName  +
+                " GROUP BY " + Tables.Item.colItemName +
+                " HAVING COUNT(" + Tables.Item.colItemName + ") > 3" +
+                " LIMIT 10 " ;
+
+        Cursor cursor = db.rawQuery(query , null);
+        if(cursor.getCount() > 0){
+            for(cursor.moveToFirst(); !cursor.isAfterLast() ; cursor.moveToNext()){
+                ItemViewModel item = new ItemViewModel();
+
+                item.itemName = cursor.getString(0);
+
+                result.add(item);
+            }
+        }
+        db.close();
+
+        return result;
+    }
 }

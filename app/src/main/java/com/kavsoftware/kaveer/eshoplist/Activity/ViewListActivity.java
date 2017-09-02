@@ -100,7 +100,6 @@ public class ViewListActivity extends AppCompatActivity  implements NavigationVi
         return result;
     }
 
-
     private void PopulateListAndDisplay(ArrayList<ListViewModel> items) {
         if (items.size() == 0){
             arrayItems.add("No List");

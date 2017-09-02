@@ -20,6 +20,14 @@ public class Tables {
 
     }
 
+    public static abstract class FavoriteItem implements BaseColumns{
+        public static final String tableName = "FavoriteItem";
+
+        public static String colFavItemId = "FavoriteItemId";
+        public static String colItemTitle ="ItemTitle";
+
+    }
+
     public static abstract class List implements BaseColumns{
         public static final String tableName = "List";
 
@@ -29,4 +37,6 @@ public class Tables {
         public static String colStatus = "ListStatus";
 
     }
+
+
 }
