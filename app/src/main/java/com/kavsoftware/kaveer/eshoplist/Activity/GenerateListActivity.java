@@ -112,7 +112,7 @@ public class GenerateListActivity extends AppCompatActivity  implements Navigati
                     layout.addView(listTitle);
 
                     AlertDialog.Builder popUpMessage = new AlertDialog.Builder(GenerateListActivity.this);
-                    popUpMessage.setMessage("Click on an item to edit the price and quantity")
+                    popUpMessage.setMessage("Add list name")
                             .setTitle("Information")
                             .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {

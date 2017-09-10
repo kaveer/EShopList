@@ -34,6 +34,7 @@ public class UpdateGeneratedItemActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_update_generated_item);
+        setTitle("Update item");
 
         try{
             if (InitializeWidget()){
@@ -50,6 +51,7 @@ public class UpdateGeneratedItemActivity extends AppCompatActivity {
                     SetEditText(item);
                 }
                 else if(items.size() != 0 && itemPosition == 0){
+                    setTitle("Add item");
                     Toast messageBox = Toast.makeText(this , "Add item in generated list" , Toast.LENGTH_LONG);
                     messageBox.show();
                 }

@@ -38,6 +38,7 @@ public class ViewItemInListActivity extends AppCompatActivity {
         final ListViewModel selectedList = (ListViewModel) i.getSerializableExtra("selectedList");
 
         try{
+
             if (initializeWidget()){
                 if (selectedList.listId != 0 && !selectedList.listTitle.isEmpty()){
 
@@ -71,12 +72,11 @@ public class ViewItemInListActivity extends AppCompatActivity {
                             messageBox.show();
                         }
 
-
-
                     }
 
 
                 });
+
             }
         }catch (Exception msg){
             Toast messageBox = Toast.makeText(this , msg.getMessage() , Toast.LENGTH_LONG);
@@ -115,6 +115,7 @@ public class ViewItemInListActivity extends AppCompatActivity {
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayItems);
         itemsListVIew.setAdapter(adapter);
     }
+
 
     private boolean initializeWidget() {
         try{

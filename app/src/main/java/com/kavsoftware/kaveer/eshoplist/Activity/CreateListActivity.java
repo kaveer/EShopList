@@ -71,7 +71,10 @@ public class CreateListActivity extends AppCompatActivity  implements Navigation
                     public void onClick(View v) {
                         if (IsItemValid()){
                             SetItemModel();
-                            String displayItem = itemModel.itemName + "     " + itemModel.quantity + "      " + itemModel.price + "     " + itemModel.totalPrice;
+                            String displayItem = itemModel.itemName
+                                                + "     " + itemModel.quantity
+                                                + "      " + itemModel.price + "     "
+                                                + itemModel.totalPrice;
                             if(DisplayItemInListView(displayItem)){
                                 arrayItemsModel.add(itemModel);
                             }
